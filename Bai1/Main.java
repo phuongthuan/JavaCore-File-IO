@@ -1,4 +1,4 @@
-package JavaCore.file.io.handle.Bai1;
+package JavaCore.file.io.handle.npt.Bai1;
 
 import javax.management.Query;
 import java.io.*;
@@ -23,6 +23,8 @@ public class Main {
             System.out.println("* 4.DISPLAY STUDENT  *");
             System.out.println("* 5.WRITE ST TO FILE *");
             System.out.println("* 6.READ ST FROMFILE *");
+            System.out.println("* 7.WRITE ST TO TEXT *");
+            System.out.println("* 8.READ ST FROM TEXT*");
             System.out.println("* 0.QUIT             *");
             System.out.println("**********************");
             System.out.println("ENTER YOUR CHOICE: ");
@@ -76,11 +78,42 @@ public class Main {
                 case 5:
                     input.nextLine();
                     List<Student> st = stmn.getListStudents();
-                    stda.writeToBinaryFile(st);
+                    try {
+                        stda.writeToBinaryFile(st);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("Written done !!");
                     break;
                 case 6:
                     input.nextLine();
+                    try {
+                        stda.readFromBinaryFile("student.dat");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    input.nextLine();
+                    List<Student> listst = stmn.getListStudents();
+                    try {
+                        stda.writeToTextFile(listst);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Written done !!");
+                    break;
+                case 8:
+                    input.nextLine();
+                    try {
+                        stda.readFromTextFile("studenttext.txt");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 0:
                     set = false;
