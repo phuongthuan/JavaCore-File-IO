@@ -1,4 +1,4 @@
-package JavaCore.file.io.handle.Bai1;
+package JavaCore.file.io.handle.npt.Bai1;
 
 import javax.management.Query;
 import java.util.ArrayList;
@@ -29,11 +29,8 @@ public class StudentManager {
     //======Add student=============
 
     public boolean addStudent(Student st) {
-        if (!existsID(st.getId()) && !existsName(st.getName())) {
             listStudents.add(st);
             return true;
-        }
-        return false;
     }
 
     //======Edit student=============
