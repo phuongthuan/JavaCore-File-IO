@@ -1,29 +1,26 @@
-package JavaCore.file.io.handle.Bai2;
+package JavaCore.file.io.handle.npt.Bai2;
 
 import java.io.*;
 
 public class FileSplit {
     public static void splitFile(File f) throws IOException {
-        int partCounter = 1;
-        int sizeOfFiles = 1024 * 1024;
-        byte[] buffer = new byte[sizeOfFiles];
 
-        try (BufferedInputStream bis = new BufferedInputStream(
-                new FileInputStream(f))) {
-            String name = f.getName();
+        int partFiles = 1;
+        int sizeOfSubfiles = 1024 * 1024;
+        byte[] buffer = new byte[sizeOfSubfiles];
 
-            int tmp = 0;
-            while ((tmp = bis.read(buffer)) > 0) {
-                File newFile = new File(f.getParent(), name + "."
-                        + String.format("%03d", partCounter++));
-                try (FileOutputStream out = new FileOutputStream(newFile)) {
-                    out.write(buffer, 0, tmp);//tmp is chunk size
-                }
-            }
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));
+        String name = f.getName();
+        int tmp = 0;
+        while ((tmp = bis.read(buffer)) > 0) {
+            File newFile = new File(f.getParent(), name + "."
+                    + String.format("%03d", partFiles++));
+            FileOutputStream out = new FileOutputStream(newFile);
+            out.write(buffer, 0, tmp);
         }
     }
 
     public static void main(String[] args) throws IOException {
-        splitFile(new File("C:\\Users\\PhuongThuan\\Desktop\\Cây đàn bỏ quên.mp3"));
+        splitFile(new File("C:\\Users\\PhuongThuan\\Desktop\\Tha Vao Mua - Trung Quan Idol_2.mp3"));
     }
 }
